@@ -109,8 +109,60 @@ At each iteration of the training loop:
 
 This training function should iteratively improve the model by minimizing the error through gradient descent updates.
 
+## Question 4- Pytorch Basics
+PyTorch is the industry standard library for deep learning and was used to train ChatGPT. Checkout the first 9 minutes of this video for a summary of the basic functions.
 
-## Question 4- Digit Classifier
+You will use built in PyTorch functions to manipulate tensors. These are important to understand before building more interesting & powerful neural networks.
+
+Your tasks:
+
+Reshape an 
+M
+×
+N
+M×N tensor into a 
+(
+M
+⋅
+N
+ 
+/
+/
+ 
+2
+)
+×
+2
+(M⋅N//2)×2 tensor.
+Find the average of every column in a tensor.
+Combine an 
+M
+×
+N
+M×N tensor and a 
+M
+×
+M
+M×M tensor into a 
+M
+×
+(
+M
++
+N
+)
+M×(M+N) tensor.
+Calculate the mean squared error loss between a prediction and target tensor.
+Inputs:
+
+to_reshape - a tensor to reshape
+to_avg - a tensor to average column wise
+cat_one - the first tensor to concatenate
+cat_two - the second tensor to concatenate
+prediction - the output tensor of a model
+target - the true labels for the model inputs
+
+## Question 5- Digit Classifier
 Your task is to implement a neural network that can recognize black and white images of handwritten digits. This is a simple but powerful application of neural networks. To learn about coding neural networks in PyTorch, watch this 10 minute clip.
 
 For the model architecture, first use linear layer with 512 neurons follwed by a ReLU activation, as well as a dropout layer with probability p = 0.2 that precedes a final Linear layer with 10 neurons and a sigmoid activation. Each output neuron corresponds to a digit from 0 to 9, where each value is the probability that the input image is the corresponding digit.
@@ -122,7 +174,7 @@ For the model architecture, first use linear layer with 512 neurons follwed by a
 Write the **architecture / constructor** and the **forward()** pass that returns the model's prediction.  
 Do not write the training loop (or gradient descent) to minimize the error.
 
-## Question 5- Into the Natural Language Processing
+## Question 6- Into the Natural Language Processing
 In this problem, you will load in a raw body of text and set it up for training. ChatGPT uses the entire text of the internet for training, but in this problem we will use Amazon product reviews and Tweets from X.
 
 Your task is to encode the input dataset of strings as an integer tensor of size `2⋅N×T`, where `T` is the length of the longest string. The lexicographically first word should be represented as 1, the second should be 2, and so on. In the final tensor, list the positive encodings, in order, before the negative encodings.
@@ -132,7 +184,7 @@ Your task is to encode the input dataset of strings as an integer tensor of size
 - **positive** - a list of strings, each with positive emotion  
 - **negative** - a list of strings, each with negative emotion
 
-## Question 6- Sentiment Analysis
+## Question 7- Sentiment Analysis
 Your task is to implement a neural network that can recognize positive or negative emotion in an input sentence. This application of word embeddings is the first step in building ChatGPT. To learn more about word embeddings, check out this video.
 
 The background video is critical to completely understanding the ML concepts involved in this problem.
@@ -151,7 +203,7 @@ Implement the **constructor** and **forward()** pass that outputs the model's pr
 - **vocabulary_size** - the number of different words the model should be able to recognize  
 - **x** - a list of strings, each with negative emotion
 
-## Question 7- GPT Dataset
+## Question 8- GPT Dataset
 Before we can train a transformer like GPT, we need to define the dataset. We take a giant body of text and we can create examples for the model to predict the next token based on different contexts. This is what “ChatGPT was trained on the entire internet” means.
 
 Your task is to write the batch_loader() function which will generate a batch_size * context_length dataset and its labels. Use torch.randint() to pick batch_size different starting words for each sequence.
@@ -178,7 +230,7 @@ Explanation: The first random index chosen was 1, which became the starting inde
 
 NOTE: Before feeding this into the model, we would encode each word as an integer, just as done in the NLP Intro problem. It is recommended to solve that problem first.
 
-## Question 8- Self Attention
+## Question 9- Self Attention
 We're finally ready to code up self-attention. This is the main part of Transformers like ChatGPT. Check out this video for an explanation of the concepts.
 
 The background video is critical to completely understanding the ML concepts involved in this problem. It is a bit lengthy, but is worth the time investment. This problem teaches you, at the lowest level, how LLMs read like humans and focus on what's important. This is definitely the hardest problem in the series.
@@ -191,7 +243,7 @@ The class which will be used as a layer in the GPT class just like nn.Linear(). 
 - **attention_dim** - the head size where `attention_dim > 0`.
 - **embedded** - the input to `forward()`. `embedded_shape = (batch_size, context_length, embedding_dim)`. This tuple format is PyTorch convention for 3-D.
 
-## Question 9- Multi Headed Self Attention
+## Question 10- Multi Headed Self Attention
 It's time to implement multi-headed self-attention. This layer is what makes LLMs so good at talking like real people. Check out this video for an explanation of the concepts.
 
 Fortunately, this problem is a LOT easier than Self Attention. It's recommended to solve that problem first!
@@ -205,21 +257,21 @@ Your task is to code up the **MultiHeadedSelfAttention** class making use of the
 - **num_heads** - number of self-attention instances where `num_heads > 0` and `attention_dim % num_heads = 0`.
 - **embedded** - the input to `forward()` where `embedded.shape = (batch_size, context_length, embedding_dim)`.
 
-## Question 10- Transformer Block
+## Question 11- Transformer Block
 It's finally time to code up the TransformerBlock class. This is the most important class to write in defining the GPT model. It is the gray rectangular box repeated “Nx” times, and it is a giant neural network that uses Multi Headed Attention, among other neural network layers that are given in the starter code.
 
 Note that you should ignore the multi-headed attention and add & norm that comes right before the feedforward block for LLMs. Check out this video for a full explanation.
 
 Your forward() method should return a `(batch_size, context_length, model_dim)` tensor.
 
-## Question 11- Code GPT
+## Question 12- Code GPT
 We're finally ready to code up the GPT class. This follows the architecture that almost all large language models use, including ChatGPT. Check out this video for a background explanation.
 
 You are given a TransformerBlock, which combines Multi Headed Attention and a FeedForward (Vanilla) Neural Network.
 
 The forward method should return a `(batch_size, context_length, vocab_size)` tensor. The output layer has vocab_size neurons, each representing the likelihood of a particular token coming next.
 
-## Question 12- Make GPT Talk Back
+## Question 13- Make GPT Talk Back
 We are going to use our trained model to generate text. Implementing inference is a bit more complex than just calling forward() in a loop. This is because forward() outputs the probability of each possible next character. Given a bunch of probabilities, we have to choose the next token. Check out this video for a background explanation.
 
 The model is also only allowed to read context_length number of tokens back into the past, so we have to cut off characters that are farther back than this threshold at every iteration. Return GPT's response as a String.
