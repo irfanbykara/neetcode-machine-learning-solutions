@@ -1,7 +1,7 @@
 ### Neetcode Machine Learning Practice Solutions
 
 
-I have spent good time trying to solve the neetcode.io's machine learning questions which I found extremely helpful to remember/understand/learn the foundations of today's machine learning. 
+I have spent good time trying to solve the neetcode.io's machine learning questions which I found extremely helpful to remember/understand/learn the foundations of modern day's machine learning problems.
 I tried not to use any LLM and tried to just answer the questions in the simplest way possible without caring about the optimization and code quality.
 Here I share the solutions (all are accepted solutions) with the people in the field.
 
